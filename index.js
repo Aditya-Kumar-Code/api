@@ -1,21 +1,15 @@
-const express = require('express')
+const express = require('express');
+const app = express();
 
-const app = express()
-const PORT = 4000
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
-const cors = require("cors");
-app.use(cors());
-app.listen(PORT, () => {
-  console.log(`API listening on PORT ${PORT} `)
-})
 
-app.get('/', (req, res) => {
-  res.send({data:'hello'})
-})
+// ... rest of your server code
 
-app.get('/about', (req, res) => {
-  res.send('This is my about route..... ')
-})
-
-// Export the Express API
-module.exports = app
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
